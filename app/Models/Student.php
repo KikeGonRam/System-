@@ -5,10 +5,15 @@
    use Illuminate\Database\Eloquent\Model;
    use Illuminate\Support\Facades\Hash;
    use Carbon\Carbon;
-
-   class Student extends Model
+   use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+   use Illuminate\Auth\Authenticatable;
+   
+   class Student extends Model implements AuthenticatableContract
    {
-       protected $fillable = [
+        
+        use Authenticatable;
+       
+        protected $fillable = [
            'name', 'email', 'password', 'photo', 'date_of_birth', 'matricula', 'edad'
        ];
 
@@ -33,4 +38,12 @@
        {
            return $this->photo ? asset('storage/' . $this->photo) : asset('images/default-student.png');
        }
+       public function groups()
+       {
+           return $this->belongsToMany(Group::class, 'group_student');
+       }
+       public function grades()
+        {
+            return $this->hasMany(Grade::class);
+        }
    }

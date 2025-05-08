@@ -346,6 +346,23 @@
                                 </svg>
                             </a>
                         </div>
+
+                        <div class="text-center mb-6">
+                            <a href="{{ route('admin.subjects.index') }}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Gestionar Asignaturas</a>
+                        </div>
+
+                        <div class="text-center mb-6">
+                            <a href="{{ route('admin.groups.index') }}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Gestionar Grupos</a>
+                        </div>
+
+                        <div class="text-center mb-6">
+                            <a href="{{ route('admin.grades.index') }}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Gestionar Calificaciones</a>
+                        </div>
+
+                        <div class="text-center mb-6">
+                            <a href="{{ route('admin.schedules.index') }}" class="inline-block bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Gestionar Horarios</a>
+                        </div>
+
                     </div>
                 </div>
 

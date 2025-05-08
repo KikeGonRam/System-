@@ -5,9 +5,13 @@ namespace App\Models;
    use Illuminate\Database\Eloquent\Model;
    use Illuminate\Support\Facades\Hash;
    use Carbon\Carbon;
+   use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+   use Illuminate\Auth\Authenticatable;
 
-   class Teacher extends Model
+   class Teacher extends Model implements AuthenticatableContract
    {
+        use Authenticatable;
+
        protected $fillable = [
            'name', 'lastname', 'email', 'password', 'gender', 'date_of_birth', 'edad', 'phone_number', 'language', 'photo'
        ];
@@ -37,4 +41,17 @@ namespace App\Models;
        {
            return $this->hasMany(Course::class);
        }
+       public function subjects()
+        {
+             return $this->hasMany(Subject::class);
+        }
+        public function groups()
+        {
+            return $this->hasMany(Group::class);
+        }
+ 
+        public function schedules()
+        {
+            return $this->hasMany(Schedule::class);
+        }
    }
