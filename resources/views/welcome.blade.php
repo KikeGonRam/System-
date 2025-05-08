@@ -4,21 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Educativo Integrado</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     :root {
-      --primary: #005f73;
-      --secondary: #0a9396;
-      --accent: #94d2bd;
-      --background: #f0f5f9;
+      /* Light Theme */
+      --primary: #1e40af;
+      --secondary: #3b82f6;
+      --accent: #93c5fd;
+      --background: #f1f5f9;
+      --card-bg: #ffffff;
       --text: #1e293b;
-      --light: #ffffff;
-      --preescolar: #ff9e00;
-      --primaria: #00b4d8;
-      --secundaria: #7209b7;
-      --preparatoria: #f72585;
-      --universidad: #3a86ff;
+      --subtext: #64748b;
+      --shadow: rgba(0, 0, 0, 0.15);
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+      --preescolar: #f59e0b;
+      --primaria: #22d3ee;
+      --secundaria: #8b5cf6;
+      --preparatoria: #ec4899;
+      --universidad: #3b82f6;
+    }
+
+    [data-theme="dark"] {
+      /* Dark Theme */
+      --primary: #60a5fa;
+      --secondary: #93c5fd;
+      --accent: #1e40af;
+      --background: #1e293b;
+      --card-bg: #2d3748;
+      --text: #f1f5f9;
+      --subtext: #94a3b8;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
     }
 
     * {
@@ -26,11 +43,11 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     body {
-      background-color: var(--background);
-      background-image: radial-gradient(circle at 10% 20%, rgba(0, 95, 115, 0.05) 0%, rgba(10, 147, 150, 0.03) 90%);
+      background: var(--gradient);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -41,22 +58,18 @@
     .container {
       width: 95%;
       max-width: 1200px;
-      background-color: var(--light);
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-      padding: 2.5rem;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px var(--shadow);
+      padding: 3rem;
       position: relative;
       overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, var(--preescolar), var(--primaria), var(--secundaria), var(--preparatoria), var(--universidad));
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .header {
@@ -65,387 +78,341 @@
       position: relative;
     }
 
-    .header::after {
-      content: "";
+    .theme-toggle {
       position: absolute;
-      bottom: -1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: var(--accent);
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--text);
+      transition: transform 0.3s ease;
     }
 
-    .logo-container {
-      position: relative;
+    .theme-toggle:hover {
+      transform: rotate(180deg);
+    }
+
+    .logo {
+      background: var(--gradient);
+      color: var(--card-bg);
       width: 100px;
       height: 100px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .logo-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
       border-radius: 50%;
-      background: var(--primary);
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 10px 25px rgba(0, 95, 115, 0.2);
-      animation: pulse 2s infinite;
+      font-size: 3rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 5px 20px var(--shadow);
+      transition: transform 0.4s ease;
     }
 
-    .logo-icon {
-      color: white;
-      font-size: 2.5rem;
-      z-index: 2;
-      position: relative;
-    }
-
-    .logo-ring {
-      position: absolute;
-      width: 120%;
-      height: 120%;
-      border: 2px dashed var(--accent);
-      border-radius: 50%;
-      top: -10%;
-      left: -10%;
-      animation: rotate 20s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .logo:hover {
+      transform: rotate(360deg) scale(1.1);
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.8rem;
       color: var(--text);
-      margin-bottom: 0.5rem;
-      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.05);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
 
     .subtitle {
-      color: #64748b;
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
+      color: var(--subtext);
+      font-size: 1.2rem;
+      font-weight: 500;
     }
 
     .level-selector {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
       margin: 3rem 0;
     }
 
     .level-btn {
-      padding: 10px 22px;
+      padding: 14px 28px;
       border: none;
-      border-radius: 30px;
-      background: #f1f5f9;
-      font-size: 0.95rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
+      z-index: 1;
+      color: var(--card-bg);
     }
 
     .level-btn::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: 0.5s;
-    }
-
-    .level-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      background: var(--accent);
+      transition: left 0.3s ease;
+      z-index: -1;
     }
 
     .level-btn:hover::before {
-      left: 100%;
+      left: 0;
     }
 
-    .level-btn.preescolar:hover { background-color: var(--preescolar); color: white; }
-    .level-btn.primaria:hover { background-color: var(--primaria); color: white; }
-    .level-btn.secundaria:hover { background-color: var(--secundaria); color: white; }
-    .level-btn.preparatoria:hover { background-color: var(--preparatoria); color: white; }
-    .level-btn.universidad:hover { background-color: var(--universidad); color: white; }
+    .level-btn:hover {
+      color: var(--text);
+      transform: scale(1.05);
+    }
+
+    .level-btn.preescolar { background: var(--preescolar); }
+    .level-btn.primaria { background: var(--primaria); }
+    .level-btn.secundaria { background: var(--secundaria); }
+    .level-btn.preparatoria { background: var(--preparatoria); }
+    .level-btn.universidad { background: var(--universidad); }
+
+    .level-btn[aria-label]:hover::after {
+      content: attr(aria-label);
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: var(--card-bg);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      z-index: 10;
+    }
 
     .user-types {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
     }
 
     .user-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
       text-align: center;
-      transition: all 0.4s;
+      transition: all 0.4s ease;
       position: relative;
-      border: 1px solid #f1f5f9;
+      overflow: hidden;
+      box-shadow: 0 10px 25px var(--shadow);
     }
 
     .user-card::before {
-      content: "";
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f0f5f9' fill-opacity='0.6' fill-rule='evenodd'/%3E%3C/svg%3E");
-      opacity: 0.5;
-      border-radius: 16px;
-      z-index: 0;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .user-card:hover::before {
+      transform: translate(25%, 25%);
     }
 
     .user-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      border-color: var(--accent);
-    }
-
-    .icon-wrapper {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--secondary), var(--primary));
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto 1.5rem;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 10px 20px rgba(10, 147, 150, 0.2);
-    }
-
-    .user-card:hover .icon-wrapper {
-      transform: scale(1.1);
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 25px 50px var(--shadow);
     }
 
     .user-card i {
-      font-size: 2.5rem;
-      color: white;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .user-card:hover i {
+      color: var(--secondary);
+      transform: scale(1.2);
     }
 
     .user-card h3 {
+      font-family: 'Poppins', sans-serif;
       color: var(--text);
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1;
+      font-size: 1.7rem;
+      margin-bottom: 0.75rem;
     }
 
     .user-card p {
       font-size: 1rem;
-      color: #6b7280;
+      color: var(--subtext);
       margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
     }
 
     .btn {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
+      background: var(--gradient);
+      color: var(--card-bg);
       border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 30px;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
       text-decoration: none;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
       position: relative;
       z-index: 1;
-      box-shadow: 0 5px 15px rgba(0, 95, 115, 0.2);
-      display: inline-block;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 0;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 95, 115, 0.3);
-    }
-
-    .ancient-motif {
-      position: absolute;
-      width: 200px;
-      height: 200px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%2394d2bd' stroke-width='1' opacity='0.2'%3E%3Ccircle cx='100' cy='100' r='90'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='50'/%3E%3Ccircle cx='100' cy='100' r='30'/%3E%3Cpath d='M100,10 L100,190 M10,100 L190,100 M29.29,29.29 L170.71,170.71 M29.29,170.71 L170.71,29.29'/%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .motif-1 {
-      top: -100px;
-      left: -100px;
-    }
-
-    .motif-2 {
-      bottom: -100px;
-      right: -100px;
+      color: var(--text);
+      transform: scale(1.1);
     }
 
     .footer {
       text-align: center;
       margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e2e8f0;
-      font-size: 0.9rem;
-      color: #94a3b8;
-      position: relative;
-      z-index: 1;
+      font-size: 0.95rem;
+      color: var(--subtext);
+      font-weight: 500;
     }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
+    .confetti {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: confettiFall 6s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
     }
 
-    .social-links a {
-      color: var(--primary);
-      font-size: 1.2rem;
-      transition: 0.3s;
-    }
-
-    .social-links a:hover {
-      color: var(--secondary);
-      transform: translateY(-3px);
+    @keyframes confettiFall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(1080deg); opacity: 0; }
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
-      }
-      
-      h1 {
-        font-size: 2rem;
-      }
-      
-      .level-selector {
-        gap: 10px;
-      }
-      
-      .level-btn {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-      }
+      .container { padding: 2rem; }
+      h1 { font-size: 2.2rem; }
+      .logo { width: 80px; height: 80px; font-size: 2.5rem; }
+      .user-card { padding: 2rem; }
+      .btn { padding: 0.8rem 1.8rem; font-size: 1rem; }
+      .level-btn { padding: 12px 24px; font-size: 1rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="ancient-motif motif-1"></div>
-    <div class="ancient-motif motif-2"></div>
-    
     <div class="header">
-      <div class="logo-container">
-        <div class="logo-ring"></div>
-        <div class="logo-bg">
-          <i class="fas fa-school logo-icon"></i>
-        </div>
-      </div>
+      <button class="theme-toggle" aria-label="Cambiar tema">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="logo"><i class="fas fa-graduation-cap"></i></div>
       <h1>Portal Educativo Integrado</h1>
-      <p class="subtitle">Uniendo la sabiduría tradicional con las tecnologías del futuro para una experiencia educativa completa</p>
+      <p class="subtitle">¡Tu plataforma para aprender, enseñar y gestionar con facilidad!</p>
     </div>
 
     <div class="level-selector">
-      <button class="level-btn preescolar"><i class="fas fa-baby fa-sm mr-2"></i> Preescolar</button>
-      <button class="level-btn primaria"><i class="fas fa-child fa-sm mr-2"></i> Primaria</button>
-      <button class="level-btn secundaria"><i class="fas fa-user fa-sm mr-2"></i> Secundaria</button>
-      <button class="level-btn preparatoria"><i class="fas fa-user-graduate fa-sm mr-2"></i> Preparatoria</button>
-      <button class="level-btn universidad"><i class="fas fa-university fa-sm mr-2"></i> Universidad</button>
+      <button class="level-btn preescolar" aria-label="Explora el nivel Preescolar">Preescolar</button>
+      <button class="level-btn primaria" aria-label="Explora el nivel Primaria">Primaria</button>
+      <button class="level-btn secundaria" aria-label="Explora el nivel Secundaria">Secundaria</button>
+      <button class="level-btn preparatoria" aria-label="Explora el nivel Preparatoria">Preparatoria</button>
+      <button class="level-btn universidad" aria-label="Explora el nivel Universidad">Universidad</button>
     </div>
 
     <div class="user-types">
       <div class="user-card">
-        <div class="icon-wrapper">
-          <i class="fas fa-user-graduate"></i>
-        </div>
+        <i class="fas fa-user-graduate"></i>
         <h3>Estudiantes</h3>
-        <p>Accede a tu plataforma de aprendizaje, consulta materiales didácticos, calificaciones y participa en comunidades virtuales.</p>
-        <a href="#" class="btn">Ingresar ahora</a>
+        <p>Accede a tus clases, revisa calificaciones y mantente al día con tu progreso.</p>
+        <a href="#" class="btn">¡Explorar Ahora!</a>
       </div>
-      
       <div class="user-card">
-        <div class="icon-wrapper">
-          <i class="fas fa-chalkboard-teacher"></i>
-        </div>
+        <i class="fas fa-chalkboard-teacher"></i>
         <h3>Docentes</h3>
-        <p>Gestiona tus clases, materiales didácticos, calificaciones y mantén comunicación efectiva con tus estudiantes.</p>
-        <a href="#" class="btn">Ingresar ahora</a>
+        <p>Organiza tus clases, crea actividades y registra asistencias fácilmente.</p>
+        <a href="#" class="btn">¡Comenzar!</a>
       </div>
-      
       <div class="user-card">
-        <div class="icon-wrapper">
-          <i class="fas fa-users-cog"></i>
-        </div>
+        <i class="fas fa-users-cog"></i>
         <h3>Administradores</h3>
-        <p>Supervisa todos los aspectos del sistema educativo, genera reportes analíticos y administra usuarios y permisos.</p>
-        <a href="#" class="btn">Ingresar ahora</a>
+        <p>Gestiona usuarios, niveles educativos y genera reportes avanzados.</p>
+        <a href="#" class="btn">¡Administrar!</a>
       </div>
     </div>
 
     <div class="footer">
-      <p>&copy; 2025 Sistema de Gestión Escolar • Todos los derechos reservados</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
+      © 2025 Sistema de Gestión Escolar. Diseñado con 💙 para transformar la educación.
     </div>
   </div>
 
   <script>
-    // Añadir efectos de hover a los botones de nivel
-    document.querySelectorAll('.level-btn').forEach(button => {
-      button.addEventListener('mouseover', function() {
-        // Resaltar el botón actual
-        this.style.transform = 'scale(1.05)';
-      });
-      
-      button.addEventListener('mouseout', function() {
-        // Volver a la normalidad
-        this.style.transform = 'scale(1)';
-      });
-      
-      button.addEventListener('click', function() {
-        // Destacar el botón seleccionado
-        document.querySelectorAll('.level-btn').forEach(btn => {
-          btn.style.fontWeight = '400';
-          btn.classList.remove('active');
-        });
-        
-        this.style.fontWeight = '700';
-        this.classList.add('active');
-      });
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const themeIcon = themeToggle.querySelector('i');
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      themeIcon.classList.toggle('fa-moon', isDark);
+      themeIcon.classList.toggle('fa-sun', !isDark);
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
     });
 
-    // Efecto de animación para las tarjetas de usuario
-    document.querySelectorAll('.user-card').forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.querySelectorAll('.icon-wrapper, .btn').forEach(el => {
-          el.style.transition = 'all 0.4s ease';
-        });
+    // Confetti Effect
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.background = ['var(--preescolar)', 'var(--primaria)', 'var(--secundaria)', 'var(--preparatoria)', 'var(--universidad)'][Math.floor(Math.random() * 5)];
+      confetti.style.width = Math.random() * 8 + 8 + 'px';
+      confetti.style.height = confetti.style.width;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }
+
+    setInterval(createConfetti, 200);
+
+    // Button Click Animation
+    document.querySelectorAll('.level-btn, .btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          btn.style.transform = 'scale(1)';
+        }, 100);
       });
     });
   </script>
