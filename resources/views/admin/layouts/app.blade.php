@@ -5,28 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title', 'Sistema Escolar - Admin')</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Iconos con Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 min-h-screen font-[Poppins] text-gray-800">
 
-    <!-- Contenido -->
-    <div class="flex items-center justify-center min-h-screen px-4">
-        @yield('content')
+    <div class="min-h-screen bg-gray-100">
+
+        <div class="flex flex-col flex-1 lg:pl-64">
+            {{-- @include('admin.layouts.navigation') --}}
+
+            <main class="flex-1 py-10 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    @yield('content')
+                </div>
+            </main>
+        </div>
     </div>
 
-    <!-- Scripts adicionales desde vistas -->
     @yield('scripts')
 
-    <!-- Script de cierre de sesión por inactividad -->
     <script>
         let timeout;
         const minutes = 5;
@@ -46,7 +49,6 @@
         resetTimer();
     </script>
 
-    <!-- Script de bloqueo por intentos fallidos de login -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const MAX_ATTEMPTS = 3;
